@@ -1,5 +1,7 @@
 package com.appointment.scheduler.repository;
 
-public class AppointmentRepository {
-    
+import com.appointment.scheduler.model.Appointment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 }
