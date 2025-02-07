@@ -41,5 +41,6 @@
             "username": "root",
             "database": "scheduler_db"
         }
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }
