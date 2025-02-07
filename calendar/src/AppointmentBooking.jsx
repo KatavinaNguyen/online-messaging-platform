@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Card, CardContent } from "./components/ui/card";
-import { Button } from "./components/ui/button";
+import "./AppointmentBooking.css";
 
 const AppointmentBooking = () => {
   const [selectedType, setSelectedType] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState(null);
 
   const appointmentTypes = [
@@ -20,74 +19,61 @@ const AppointmentBooking = () => {
     "1:00 pm", "1:30 pm", "2:00 pm", "2:30 pm",
   ];
 
-  const handleTypeSelect = (type) => {
-    setSelectedType(type);
-  };
-
-  const handleDateSelect = (date) => {
-    setSelectedDate(date);
-  };
-
-  const handleTimeSelect = (time) => {
-    setSelectedTime(time);
-  };
-
   return (
-    <div className="p-4 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Book an Appointment</h1>
+    <div className="container">
+      <h1>Book an Appointment</h1>
 
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold mb-2">Select Appointment Type</h2>
-        <div className="grid grid-cols-2 gap-4">
+      {/* Appointment Types */}
+      <div>
+        <h2 className="section-title">Select Appointment Type</h2>
+        <div className="cards-container">
           {appointmentTypes.map((type) => (
-            <Card
+            <div
               key={type.id}
-              className={`cursor-pointer p-4 ${
-                selectedType === type ? "bg-green-100" : ""
-              }`}
-              onClick={() => handleTypeSelect(type)}
+              className={`card ${selectedType === type.id ? "selected" : ""}`}
+              onClick={() => setSelectedType(type.id)}
             >
-              <CardContent>
-                <p className="font-bold">{type.name}</p>
-                <p className="text-sm text-gray-600">{type.duration}</p>
-              </CardContent>
-            </Card>
+              <p><strong>{type.name}</strong></p>
+              <p>{type.duration}</p>
+            </div>
           ))}
         </div>
       </div>
 
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold mb-2">Select Date</h2>
+      {/* Date Selection */}
+      <div className="calendar">
+        <h2 className="section-title">Select Date</h2>
         <input
           type="date"
-          className="w-full border rounded p-2"
-          onChange={(e) => handleDateSelect(e.target.value)}
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
         />
       </div>
 
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold mb-2">Select Time</h2>
-        <div className="grid grid-cols-3 gap-4">
+      {/* Time Slots */}
+      <div>
+        <h2 className="section-title">Select Time</h2>
+        <div className="time-grid">
           {times.map((time, index) => (
-            <Button
+            <div
               key={index}
-              className={selectedTime === time ? "bg-green-500 text-white" : ""}
-              onClick={() => handleTimeSelect(time)}
+              className={`time-slot ${selectedTime === time ? "selected" : ""}`}
+              onClick={() => setSelectedTime(time)}
             >
               {time}
-            </Button>
+            </div>
           ))}
         </div>
       </div>
 
-      <div className="text-center">
-        <Button
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-          disabled={!selectedType || !selectedDate || !selectedTime}
-        >
-          Confirm Appointment
-        </Button>
-      </div>
+      {/* Confirm Button */}
+      <button
+        className="confirm-button"
+        disabled={!selectedType || !selectedDate || !selectedTime}
+        onClick={() => alert("Appointment Confirmed!")}
+      >
+        Confirm Appointment
+      </button>
     </div>
   );
 };
