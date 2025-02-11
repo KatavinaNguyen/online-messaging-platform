@@ -1,13 +1,19 @@
 package com.example.online_messaging;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+public class Message {
+    private String user;
+    private String message;
 
-@SpringBootApplication
-public class OnlineMessagingApplication {
+    public Message(){}
+    public Message(String user, String message){
+        this.user = user;
+        this.message = message;
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(OnlineMessagingApplication.class, args);
-	}
-
+    public String getUser() {
+        return user;
+    }
+    public String getMessage() {
+        return message;
+    }
 }
