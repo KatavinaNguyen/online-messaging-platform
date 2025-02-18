@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class WebsocketController {
     private final SimpMessagingTemplate messagingTemplate;
-    private final WebSocketSessionManager sessionManager;
+    private final WebsocketSessionManager sessionManager;
 
     @Autowired
-    public WebsocketController(SimpMessagingTemplate messagingTemplate, WebSocketSessionManager sessionManager) {
+    public WebsocketController(SimpMessagingTemplate messagingTemplate, WebsocketSessionManager sessionManager) {
         this.sessionManager = sessionManager;
         this.messagingTemplate = messagingTemplate;
     }
